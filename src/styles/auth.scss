@@ -1,0 +1,74 @@
+@import "../App.scss";
+
+.auth {
+    width: 100%;
+    height: 100vh;
+    background: $primary-color;
+
+    .card {
+        width: 90vw;
+        border-radius: 10px;
+        overflow: hidden;
+
+        .card-header {
+            background: #fff;
+            border: 0;
+            text-align: center;
+            padding-top: 30px;
+            padding-bottom: 30px;
+
+            img {
+                height: 35px;
+
+                @media (min-width: 576px) {
+                    height: 50px;
+                }
+            }
+        }
+
+        .card-body {
+            padding-bottom: 50px;
+
+            p {
+                font-family: Barlow-Medium;
+            }
+
+            small {
+                font-size: 13px;
+                font-family: Barlow-Regular;
+            }
+
+            .form-control {
+                color: #000;
+                font-size: 15px;
+                font-family: Barlow-Regular;
+                border: 1px solid #dfdfdf;
+            }
+
+            .btn {
+                background: $primary-color;
+                font-family: Barlow-Bold;
+                font-size: 17px;
+            }
+
+            a {
+                font-size: 15px;
+                color: $primary-color;
+                font-family: Barlow-Regular;
+            }
+
+            @media (min-width: 576px) {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+        }
+
+        @media (min-width: 576px) {
+            width: 500px;
+        }
+    }
+
+    h1 {
+        font-family: Barlow-Bold;
+    }
+}

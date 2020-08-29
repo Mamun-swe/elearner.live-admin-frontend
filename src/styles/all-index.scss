@@ -1,0 +1,56 @@
+@import "../App.scss";
+
+.index {
+    .filter-card {
+        @media (min-width: 992px) {
+            position: fixed;
+            top: 20px;
+            left: 270px;
+            right: 20px;
+            border-radius: 6px;
+            z-index: 9;
+        }
+    }
+
+    .data-card {
+        border-radius: 6px;
+
+        .data {
+            img {
+                height: 60px;
+            }
+
+            h5 {
+                font-family: Barlow-Medium;
+                margin-bottom: 6px;
+            }
+
+            ul {
+                padding: 0;
+                margin: 0;
+
+                li {
+                    list-style: none;
+
+                    p {
+                        font-size: 15px;
+                        margin-bottom: 0;
+                        font-family: Barlow-Regular;
+
+                        span {
+                            color: $primary-color;
+                        }
+                    }
+
+                    @media (min-width: 992px) {
+                        float: left;
+                    }
+                }
+            }
+        }
+
+        @media (min-width: 992px) {
+            margin-top: 40px;
+        }
+    }
+}
