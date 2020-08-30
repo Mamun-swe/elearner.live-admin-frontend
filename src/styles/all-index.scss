@@ -2,6 +2,8 @@
 
 .index {
     .filter-card {
+        transition: 0.6s all;
+
         @media (min-width: 992px) {
             position: fixed;
             top: 20px;
@@ -10,6 +12,15 @@
             border-radius: 6px;
             z-index: 9;
         }
+    }
+
+    .fixed-filter {
+        position: fixed;
+        top: 58px;
+        left: 0;
+        width: 100%;
+        z-index: 9;
+        border-radius: 0;
     }
 
     .data-card {
@@ -25,25 +36,84 @@
                 margin-bottom: 6px;
             }
 
-            ul {
-                padding: 0;
-                margin: 0;
+            .content {
+                ul {
+                    padding: 0;
+                    margin: 0;
 
-                li {
-                    list-style: none;
+                    li {
+                        list-style: none;
 
-                    p {
-                        font-size: 15px;
-                        margin-bottom: 0;
-                        font-family: Barlow-Regular;
+                        p {
+                            font-size: 15px;
+                            margin-bottom: 0;
+                            font-family: Barlow-Regular;
 
-                        span {
+                            span {
+                                color: $primary-color;
+                            }
+                        }
+
+                        @media (min-width: 992px) {
+                            float: left;
+                        }
+                    }
+                }
+            }
+
+            .buttons {
+                ul {
+                    padding: 0;
+                    margin: 0;
+
+                    li {
+                        list-style: none;
+                        display: inline;
+
+                        .btn {
+                            padding: 5px 7px;
+                            margin-left: 5px;
+                            margin-right: 5px;
                             color: $primary-color;
                         }
                     }
+                }
+            }
 
-                    @media (min-width: 992px) {
-                        float: left;
+            .table {
+                thead {
+                    p {
+                        margin-bottom: 0;
+                        font-size: 16px;
+                        color: #555;
+                        font-family: Barlow-Bold;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        td {
+                            padding-top: 15px;
+                            padding-bottom: 15px;
+
+                            img {
+                                height: 50px !important;
+                            }
+
+                            p {
+                                margin-bottom: 0;
+                                font-size: 14px;
+                                color: #000;
+                                font-family: Barlow-Regular;
+                            }
+
+                            .btn {
+                                padding: 5px 7px;
+                                margin-left: 5px;
+                                margin-right: 5px;
+                                color: $primary-color;
+                            }
+                        }
                     }
                 }
             }
@@ -51,6 +121,22 @@
 
         @media (min-width: 992px) {
             margin-top: 40px;
+        }
+    }
+}
+
+.custom-modal {
+    .modal-dialog {
+        .modal-content {
+            h5 {
+                color: $primary-color;
+                font-family: Barlow-Regular;
+            }
+
+            .btn {
+                font-size: 15px;
+                font-family: Barlow-Bold;
+            }
         }
     }
 }

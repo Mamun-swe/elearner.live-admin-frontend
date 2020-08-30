@@ -8,6 +8,9 @@ import Logo from '../assets/static/logo.png';
 
 import SideMenu from '../Components/SideMenu';
 import Dashboard from '../Pages/Dashboard/Index';
+import CategoryIndex from '../Pages/Category/Index';
+import CategoryCreate from '../Pages/Category/Create';
+import CategoryEdit from '../Pages/Category/Edit';
 import CourseIndex from '../Pages/Course/Index';
 import CourseEdit from '../Pages/Course/Edit';
 import CourseCreate from '../Pages/Course/Create';
@@ -56,6 +59,9 @@ const Master = () => {
             <div className="main">
                 <Switch>
                     <Route exact path="/admin/" component={Dashboard} />
+                    <Route exact path="/admin/categories" component={CategoryIndex} />
+                    <Route exact path="/admin/category/create" component={CategoryCreate} />
+                    <Route exact path="/admin/category/:id/edit" component={CategoryEdit} />
                     <Route exact path="/admin/all-course" component={CourseIndex} />
                     <Route exact path="/admin/course/:id/edit" component={CourseEdit} />
                     <Route exact path="/admin/course/create" component={CourseCreate} />

@@ -1,0 +1,65 @@
+@import "../App.scss";
+
+.create {
+    .bar-card {
+        transition: 0.6s all;
+
+        @media (min-width: 992px) {
+            position: fixed;
+            top: 20px;
+            left: 270px;
+            right: 20px;
+            border-radius: 6px;
+            z-index: 9;
+        }
+    }
+
+    .fixed-bar {
+        position: fixed;
+        top: 58px;
+        left: 0;
+        width: 100%;
+        z-index: 9;
+        border-radius: 0;
+    }
+
+    form {
+        small {
+            font-size: 14px;
+            text-transform: capitalize;
+            font-family: Barlow-Regular;
+        }
+
+        .form-control {
+            color: #000;
+            font-size: 15px;
+            font-family: Barlow-Regular;
+        }
+
+        // File Upload box
+        .file-upload-box {
+            width: 80px;
+            height: 80px;
+            color: #a5a2a2;
+            background: #dfdfdf36;
+            cursor: pointer;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .btn {
+            color: #fff;
+            font-size: 17px;
+            font-family: Barlow-Bold;
+            background: $primary-color;
+            padding: 10px 40px;
+        }
+    }
+}
