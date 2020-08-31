@@ -14,7 +14,16 @@ import CategoryEdit from '../Pages/Category/Edit';
 import CourseIndex from '../Pages/Course/Index';
 import CourseEdit from '../Pages/Course/Edit';
 import CourseCreate from '../Pages/Course/Create';
-
+import InstructorIndex from '../Pages/Instructor/Index';
+import InstructorCreate from '../Pages/Instructor/Create';
+import learnerIndex from '../Pages/Learners/Index';
+import AdminIndex from '../Pages/Admin/Index';
+import AdminCreate from '../Pages/Admin/Create';
+import AdminEdit from '../Pages/Admin/Edit';
+import EngineerIndex from '../Pages/Engineers/Index';
+import EngineerCreate from '../Pages/Engineers/Create';
+import EngineerEdit from '../Pages/Engineers/Edit';
+import ProfileIndex from '../Pages/Profile/Index';
 
 
 
@@ -65,9 +74,19 @@ const Master = () => {
                     <Route exact path="/admin/all-course" component={CourseIndex} />
                     <Route exact path="/admin/course/:id/edit" component={CourseEdit} />
                     <Route exact path="/admin/course/create" component={CourseCreate} />
+                    <Route exact path="/admin/instructor" component={InstructorIndex} />
+                    <Route exact path="/admin/instructor/create" component={InstructorCreate} />
+                    <Route exact path="/admin/learners" component={learnerIndex} />
+                    <Route exact path="/admin/all-admin" component={AdminIndex} />
+                    <Route exact path="/admin/create-admin" component={AdminCreate} />
+                    <Route exact path="/admin/:id/edit-admin" component={AdminEdit} />
+                    <Route exact path="/admin/engineers" component={EngineerIndex} />
+                    <Route exact path="/admin/engineer/create" component={EngineerCreate} />
+                    <Route exact path="/admin/engineer/:id/edit" component={EngineerEdit} />
+                    <Route exact path="/admin/profile/me" component={ProfileIndex} />
 
                     <Route path="*">
-                        <h3 className="text-center mt-5 pt-5 pt-lg-0"><b>404 Page not found</b></h3>
+                        <h3 className="text-center mt-5 pt-5 pt-lg-0"><b>404 Page not found x</b></h3>
                     </Route>
                 </Switch>
             </div>

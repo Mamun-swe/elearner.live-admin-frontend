@@ -1,0 +1,34 @@
+@import "../App.scss";
+
+.profile {
+    .card {
+        margin: auto;
+
+        h5 {
+            margin-bottom: 7px;
+            font-family: Barlow-Medium;
+        }
+
+        p {
+            margin-bottom: 7px;
+            font-size: 15px;
+            font-family: Barlow-Regular;
+        }
+
+        .btn {
+            font-size: 16px;
+            border-radius: 5px;
+            background: $primary-color;
+            font-family: Barlow-Medium;
+            padding: 3px 10px;
+        }
+
+        @media (max-width: 576px) {
+            width: 90vw;
+        }
+
+        @media (min-width: 576px) {
+            width: 500px;
+        }
+    }
+}

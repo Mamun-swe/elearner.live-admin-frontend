@@ -11,12 +11,15 @@ import {
     ic_settings,
     ic_account_circle,
     ic_notifications,
-    ic_power_settings_new
+    ic_power_settings_new,
+    ic_code
 } from 'react-icons-kit/md';
 import Logo from '../assets/static/logo.png';
 
 const SideMenu = (props) => {
     const history = useHistory();
+
+    const notoficationsCount = "10000000";
 
     const logout = () => {
         localStorage.clear()
@@ -51,29 +54,45 @@ const SideMenu = (props) => {
                     <span className="ml-2">Add New Course</span>
                 </NavLink>
 
-                <NavLink exact activeClassName="isActive" to="/admin/singer">
+                <NavLink exact activeClassName="isActive" to="/admin/instructor">
                     <Icon icon={ic_group} size={18} />
                     <span className="ml-2">Instructors List</span>
                 </NavLink>
 
-                <NavLink exact activeClassName="isActive" to="/admin/songs">
+                <NavLink exact activeClassName="isActive" to="/admin/learners">
                     <Icon icon={ic_group} size={18} />
                     <span className="ml-2">Learners</span>
                 </NavLink>
 
-                <NavLink exact activeClassName="isActive" to="/admin/users">
+                <NavLink exact activeClassName="isActive" to="/admin/all-admin">
                     <Icon icon={ic_group} size={18} />
                     <span className="ml-2">Admin List</span>
                 </NavLink>
 
-                <NavLink exact activeClassName="isActive" to="/admin/profile">
+                <NavLink exact activeClassName="isActive" to="/admin/engineers">
+                    <Icon icon={ic_code} size={18} />
+                    <span className="ml-2">Engineers</span>
+                </NavLink>
+
+                <NavLink exact activeClassName="isActive" to="/admin/profile/me">
                     <Icon icon={ic_account_circle} size={18} />
                     <span className="ml-2">My Profile</span>
                 </NavLink>
 
                 <NavLink exact activeClassName="isActive" to="/admin/notifications">
-                    <Icon icon={ic_notifications} size={18} />
-                    <span className="ml-2">Notifications</span>
+                    <div className="d-flex">
+                        <div>
+                            <Icon icon={ic_notifications} size={18} />
+                            <span className="ml-2">Notifications</span>
+                        </div>
+                        <div className="ml-auto">
+                            {notoficationsCount.length > 3 ?
+                                <span>{notoficationsCount.slice(0, 3)}+</span>
+                                :
+                                <span>{notoficationsCount}</span>
+                            }
+                        </div>
+                    </div>
                 </NavLink>
 
                 <NavLink exact activeClassName="isActive" to="/admin/settings">
