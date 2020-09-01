@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/all-index.scss';
+import '../../styles/notification.scss';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Icon } from 'react-icons-kit';
-import { ic_add } from 'react-icons-kit/md';
 import { apiURL } from '../../utils/apiUrl';
-
-import EngineerTable from '../../Components/EngineerTable';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
-    const [engineers, setEngineers] = useState([])
+    const [requests, setRequests] = useState([])
     const [scrolled, setScrolled] = useState(true)
     const [loading, setLoading] = useState(false)
 
@@ -24,21 +21,22 @@ const Index = () => {
             }
         })
 
-        const fetchEngineers = () => {
+        const fetchRequests = () => {
             setLoading(true)
             axios.get(`${apiURL}users`)
                 .then(res => {
-                    setEngineers(res.data)
+                    setRequests(res.data)
                     setLoading(false)
                 })
         }
 
-        fetchEngineers()
+        fetchRequests()
     }, [])
 
 
+
     return (
-        <div className="index">
+        <div className="index notification">
             {loading ?
                 <p>Loading...</p> :
 
@@ -51,24 +49,34 @@ const Index = () => {
                                 <div className="card-body p-3">
                                     <div className="d-flex">
                                         <div className="ml-auto">
-                                            <Link
-                                                to="/admin/engineer/create"
-                                                type="button"
-                                                className="btn rounded-0 shadow-none btn-light"
-                                            >
-                                                <Icon icon={ic_add} size={22} />
-                                            </Link>
+                                            <h5 className="mb-0">100 Requests Pending</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="col-12 px-lg-0">
+                        <div className="col-12 px-lg-0 notifications">
                             <div className="card border-0 data-card mb-4">
-                                <div className="card-body">
-                                    <EngineerTable engineers={engineers} />
-                                </div>
+
+                                {requests.length > 0 && requests.map((request, i) =>
+                                    <div className="d-flex p-2 border-bottom" key={i}>
+                                        <div className="text-center p-2"><p className="mb-0">{i + 1}</p></div>
+                                        <div className="p-2">
+                                            <p className="text-capitalize mb-0">abdullah al mamun</p>
+                                            <small><span>Payment by</span> Bkash</small>
+                                            <small className="ml-2"><span>Amount:</span> 400TK</small>
+                                        </div>
+                                        <div className="ml-auto p-2">
+                                            <Link
+                                                to={`/admin/notification/${request.id}/show`}
+                                                type="button"
+                                                className="btn btn-light shadow-none"
+                                            >View</Link>
+                                        </div>
+                                    </div>
+                                )}
+
                             </div>
                         </div>
 

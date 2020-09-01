@@ -1,0 +1,19 @@
+@import "../App.scss";
+
+.dashboard {
+    .card {
+        height: 130px;
+        margin-bottom: 30px;
+
+        h4 {
+            color: $primary-color;
+            font-family: Barlow-Regular;
+        }
+
+        h6 {
+            text-transform: uppercase;
+            font-family: Barlow-Bold;
+            margin-bottom: 0;
+        }
+    }
+}

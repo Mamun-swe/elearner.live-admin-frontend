@@ -1,0 +1,94 @@
+@import "../App.scss";
+
+.notification {
+    h5 {
+        font-family: Barlow-Medium;
+    }
+
+    .notifications {
+        p {
+            font-size: 15px;
+            font-family: Barlow-Medium;
+        }
+
+        small {
+            font-size: 13px;
+            font-family: Barlow-Regular;
+
+            span {
+                color: $primary-color;
+            }
+        }
+
+        .btn {
+            font-size: 14px;
+            color: $primary-color;
+            padding: 5px 15px;
+            margin-top: 5px;
+            font-family: Barlow-Medium;
+        }
+    }
+}
+
+.show {
+    h5 {
+        font-family: Barlow-Medium;
+        margin-bottom: 5px;
+    }
+
+    p {
+        font-size: 15px;
+        margin-bottom: 5px;
+        font-family: Barlow-Regular;
+
+        span {
+            color: $primary-color;
+        }
+    }
+
+    h6 {
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-family: Barlow-Medium;
+    }
+
+    .table {
+        thead {
+            tr {
+                td {
+                    p {
+                        font-size: 15px;
+                        font-family: Barlow-Medium;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    p {
+                        font-size: 14px;
+                        font-family: Barlow-Regular;
+                    }
+                }
+            }
+        }
+    }
+
+    .total-count {
+        h5 {
+            font-family: Barlow-Bold;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            font-size: 17px;
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-bottom: 9px;
+            background: $primary-color;
+            font-family: Barlow-Bold;
+        }
+    }
+}

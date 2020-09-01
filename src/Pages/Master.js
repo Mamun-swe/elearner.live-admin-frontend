@@ -24,6 +24,8 @@ import EngineerIndex from '../Pages/Engineers/Index';
 import EngineerCreate from '../Pages/Engineers/Create';
 import EngineerEdit from '../Pages/Engineers/Edit';
 import ProfileIndex from '../Pages/Profile/Index';
+import NotificationIndex from '../Pages/Notification/Index';
+import NotificationShow from '../Pages/Notification/Show';
 
 
 
@@ -84,6 +86,8 @@ const Master = () => {
                     <Route exact path="/admin/engineer/create" component={EngineerCreate} />
                     <Route exact path="/admin/engineer/:id/edit" component={EngineerEdit} />
                     <Route exact path="/admin/profile/me" component={ProfileIndex} />
+                    <Route exact path="/admin/notifications" component={NotificationIndex} />
+                    <Route exact path="/admin/notification/:id/show" component={NotificationShow} />
 
                     <Route path="*">
                         <h3 className="text-center mt-5 pt-5 pt-lg-0"><b>404 Page not found x</b></h3>
