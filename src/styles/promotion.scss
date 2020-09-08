@@ -1,0 +1,46 @@
+@import "../App.scss";
+
+.promotion {
+    .card {
+        border-radius: 6px;
+        overflow: hidden;
+
+        .card-header {
+            background: #fff;
+
+            h5 {
+                font-family: Barlow-Medium;
+            }
+        }
+
+        .card-body {
+            h6 {
+                color: $primary-color;
+                font-family: Barlow-Medium;
+            }
+
+            label {
+                font-size: 14px;
+                color: $primary-color;
+                font-family: Barlow-Regular;
+            }
+
+            .form-control {
+                font-size: 14px;
+                color: #000;
+                font-family: Barlow-Regular;
+            }
+
+            .form-control:focus {
+                border: 1px solid $primary-color;
+            }
+
+            .btn {
+                background: $primary-color;
+                font-family: Barlow-Bold;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    }
+}

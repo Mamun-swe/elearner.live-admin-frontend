@@ -26,6 +26,7 @@ import EngineerEdit from '../Pages/Engineers/Edit';
 import ProfileIndex from '../Pages/Profile/Index';
 import NotificationIndex from '../Pages/Notification/Index';
 import NotificationShow from '../Pages/Notification/Show';
+import PromotionIndex from '../Pages/Promotion/Index';
 
 
 
@@ -88,6 +89,7 @@ const Master = () => {
                     <Route exact path="/admin/profile/me" component={ProfileIndex} />
                     <Route exact path="/admin/notifications" component={NotificationIndex} />
                     <Route exact path="/admin/notification/:id/show" component={NotificationShow} />
+                    <Route exact path="/admin/promotion" component={PromotionIndex} />
 
                     <Route path="*">
                         <h3 className="text-center mt-5 pt-5 pt-lg-0"><b>404 Page not found x</b></h3>

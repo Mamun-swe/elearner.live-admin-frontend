@@ -14,6 +14,7 @@ import {
     ic_power_settings_new,
     ic_code
 } from 'react-icons-kit/md';
+import { bullhorn } from 'react-icons-kit/iconic/bullhorn';
 import Logo from '../assets/static/logo.png';
 
 const SideMenu = (props) => {
@@ -95,6 +96,11 @@ const SideMenu = (props) => {
                     </div>
                 </NavLink>
 
+                <NavLink exact activeClassName="isActive" to="/admin/promotion">
+                    <Icon icon={bullhorn} size={18} />
+                    <span className="ml-2">Promotions</span>
+                </NavLink>
+                
                 <NavLink exact activeClassName="isActive" to="/admin/settings">
                     <Icon icon={ic_settings} size={18} />
                     <span className="ml-2">Website Settings</span>
