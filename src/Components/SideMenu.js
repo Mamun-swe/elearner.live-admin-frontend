@@ -20,7 +20,7 @@ import Logo from '../assets/static/logo.png';
 const SideMenu = (props) => {
     const history = useHistory();
 
-    const notoficationsCount = "10000000";
+    const notificationsCount = "10000000";
 
     const logout = () => {
         localStorage.clear()
@@ -87,10 +87,10 @@ const SideMenu = (props) => {
                             <span className="ml-2">Notifications</span>
                         </div>
                         <div className="ml-auto">
-                            {notoficationsCount.length > 3 ?
-                                <span>{notoficationsCount.slice(0, 3)}+</span>
+                            {notificationsCount.length > 3 ?
+                                <span>{notificationsCount.slice(0, 3)}+</span>
                                 :
-                                <span>{notoficationsCount}</span>
+                                <span>{notificationsCount}</span>
                             }
                         </div>
                     </div>
