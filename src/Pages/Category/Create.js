@@ -13,9 +13,12 @@ const Create = () => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewURL, setPreviewURL] = useState(null)
 
+
     // Header 
     const header = {
-        Authorization: "Bearer " + localStorage.getItem("token")
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
     }
 
     useEffect(() => {
@@ -41,17 +44,15 @@ const Create = () => {
     const onSubmit = async (data) => {
         try {
             let courseSectionsRequestInString = {
-                sectionName: data.sectionName,
-                sectionDescription: data.sectionDescription
+                "sectionName": data.sectionName,
+                "sectionDescription": data.sectionDescription
             }
-
-            console.log(localStorage.getItem("token"));
 
             let formData = new FormData()
             formData.append('courseSectionsRequestInString', courseSectionsRequestInString)
             formData.append('file', selectedFile)
 
-            const upload = await axios.post(`${apiURL}sections`, formData, header)
+            const upload = await axios.post(`${apiURL}sections`, header, formData)
             console.log(upload);
         } catch (error) {
             console.log(error.message);

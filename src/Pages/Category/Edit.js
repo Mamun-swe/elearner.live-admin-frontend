@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 import "../../styles/all-edit.scss";
 import { useForm } from "react-hook-form";
 import { Icon } from 'react-icons-kit';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ic_keyboard_arrow_left, ic_camera_alt } from 'react-icons-kit/md';
+import axios from 'axios';
+import { apiURL } from '../../utils/apiUrl';
 
 import MobileImg from '../../assets/mobile.png';
 
 const Edit = () => {
+    const { id } = useParams()
     const { register, handleSubmit, errors } = useForm()
     const [scrolled, setScrolled] = useState(true)
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewURL, setPreviewURL] = useState(null)
+    const [singleCategory, setSingleCategory] = useState()
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -22,7 +26,19 @@ const Edit = () => {
                 setScrolled(true);
             }
         })
-    })
+
+        // fetch single category
+        const fetchCategory = async () => {
+            try {
+                const response = await axios.get(`${apiURL}sections/${id}`)
+                setSingleCategory(response.data)
+                console.log(response.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchCategory()
+    }, [id])
 
     // Image onChange
     const imageChangeHandeller = event => {

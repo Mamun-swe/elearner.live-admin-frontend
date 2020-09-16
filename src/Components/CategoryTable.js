@@ -48,10 +48,17 @@ const CategoryTable = ({ categories }) => {
                             <td>
                                 <img src={MobileImg} className="img-fluid" alt="..." />
                             </td>
-                            <td><p>মোবাইল অ্যাপ ডেভেলপমেন্ট</p></td>
-                            <td><p>{descp.slice(0, 130)} ...</p></td>
+                            <td><p>{category.sectionName}</p></td>
+                            <td>
+                                <p>
+                                    {category.sectionDetails ?
+                                        category.sectionDetails.slice(0, 130)+'...'
+                                        : null
+                                    }
+                                </p>
+                            </td>
                             <td className="text-center">
-                                <Link to={`/admin/category/${category.id}/edit`}
+                                <Link to={`/admin/category/${category.sectionId}/edit`}
                                     type="button"
                                     className="btn btn-light btn-sm shadow-none rounded-circle"
                                 >
@@ -61,7 +68,7 @@ const CategoryTable = ({ categories }) => {
                                 <button
                                     type="button"
                                     className="btn btn-light btn-sm shadow-none rounded-circle"
-                                    onClick={() => openModal(category.id)}
+                                    onClick={() => openModal(category.sectionId)}
                                 >
                                     <Icon icon={bin} size={18} />
                                 </button>
