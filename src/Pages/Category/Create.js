@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../styles/all-create.scss";
-import { useForm } from "react-hook-form";
-import { Icon } from 'react-icons-kit';
-import { Link } from 'react-router-dom';
-import { ic_keyboard_arrow_left, ic_camera_alt } from 'react-icons-kit/md';
+import {useForm} from "react-hook-form";
+import {Icon} from 'react-icons-kit';
+import {Link} from 'react-router-dom';
+import {ic_camera_alt, ic_keyboard_arrow_left} from 'react-icons-kit/md';
 import axios from 'axios';
-import { apiURL } from '../../utils/apiUrl';
+import {apiURL} from '../../utils/apiUrl';
 
 const Create = () => {
     const { register, handleSubmit, errors } = useForm()
@@ -15,7 +15,9 @@ const Create = () => {
 
     // Header 
     const header = {
-        Authorization: "Bearer " + localStorage.getItem("token")
+        headers:
+            {Authorization: "Bearer " + localStorage.getItem("token")}
+
     }
 
     useEffect(() => {
@@ -40,11 +42,9 @@ const Create = () => {
 
     const onSubmit = async (data) => {
         try {
-            let courseSectionsRequestInString = {
-                sectionName: data.sectionName,
-                sectionDescription: data.sectionDescription
-            }
+            let courseSectionsRequestInString= "{\"sectionName\":\""+data.sectionName+"\",\"sectionName\":\""+data.sectionDescription+"\"}";
 
+            console.log(courseSectionsRequestInString)
             console.log(localStorage.getItem("token"));
 
             let formData = new FormData()
