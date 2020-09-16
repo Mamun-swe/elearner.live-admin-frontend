@@ -28,6 +28,7 @@ const Index = () => {
                 const response = await axios.get(`${apiURL}sections`)
                 setCategories(response.data.sections)
                 setLoading(false)
+                console.log(response.data.sections);
             } catch (error) {
                 if (error) {
                     console.log(error)
