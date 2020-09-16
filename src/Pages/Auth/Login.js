@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import '../../styles/auth.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import { apiURL } from '../../utils/apiUrl';
 
 import Logo from '../../assets/static/logo.png';
 
@@ -9,13 +12,27 @@ const Login = () => {
     const history = useHistory()
     const { register, handleSubmit, errors } = useForm();
     const [loading, setLoading] = useState(false)
+    const [loginErr, setLoginErr] = useState()
 
 
-    const onSubmit = data => {
-        setLoading(true)
-        localStorage.setItem("token", data.email)
-        setLoading(false)
-        history.push('/admin')
+    const onSubmit = async (data) => {
+        try {
+            setLoading(true)
+            const response = await axios.post(`${apiURL}login`, data)
+            if (response.status === 200 && response.data.token) {
+                const user = jwt_decode(response.data.token)
+                if (user.scopes[0] === 'ADMIN') {
+                    localStorage.setItem("token", response.data.token)
+                    setLoading(false)
+                    history.push('/admin')
+                }
+            }
+        } catch (error) {
+            if (error) {
+                setLoading(false)
+                setLoginErr('Invalid e-mail or password')
+            }
+        }
     }
 
 
@@ -25,6 +42,7 @@ const Login = () => {
                 <div className="card border-0 shadow">
                     <div className="card-header">
                         <img src={Logo} className="img-fluid" alt="..." />
+                        {loginErr ? <p className="mb-0 mt-2 text-danger">{loginErr}</p> : null}
                     </div>
                     <div className="card-body">
                         <form onSubmit={handleSubmit(onSubmit)}>

@@ -12,7 +12,6 @@ const Index = () => {
     const [scrolled, setScrolled] = useState(true)
     const [loading, setLoading] = useState(false)
 
-
     useEffect(() => {
         window.addEventListener('scroll', () => {
             let isTop = window.scrollY < 50;
@@ -23,13 +22,17 @@ const Index = () => {
             }
         })
 
-        const fetchCourses = () => {
-            setLoading(true)
-            axios.get(`${apiURL}users`)
-                .then(res => {
-                    setCategories(res.data)
-                    setLoading(false)
-                })
+        const fetchCourses = async () => {
+            try {
+                setLoading(true)
+                const response = await axios.get(`${apiURL}sections`)
+                setCategories(response.data.sections)
+                setLoading(false)
+            } catch (error) {
+                if (error) {
+                    console.log(error)
+                }
+            }
         }
 
         fetchCourses()

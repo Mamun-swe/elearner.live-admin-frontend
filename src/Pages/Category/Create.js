@@ -4,12 +4,19 @@ import { useForm } from "react-hook-form";
 import { Icon } from 'react-icons-kit';
 import { Link } from 'react-router-dom';
 import { ic_keyboard_arrow_left, ic_camera_alt } from 'react-icons-kit/md';
+import axios from 'axios';
+import { apiURL } from '../../utils/apiUrl';
 
 const Create = () => {
     const { register, handleSubmit, errors } = useForm()
     const [scrolled, setScrolled] = useState(true)
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewURL, setPreviewURL] = useState(null)
+
+    // Header 
+    const header = {
+        Authorization: "Bearer " + localStorage.getItem("token")
+    }
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -31,11 +38,24 @@ const Create = () => {
         }
     }
 
-    const onSubmit = data => {
-        console.log(data);
-        let formData = new FormData()
-        formData.append('name', data.name)
-        formData.append('image', selectedFile)
+    const onSubmit = async (data) => {
+        try {
+            let courseSectionsRequestInString = {
+                sectionName: data.sectionName,
+                sectionDescription: data.sectionDescription
+            }
+
+            console.log(localStorage.getItem("token"));
+
+            let formData = new FormData()
+            formData.append('courseSectionsRequestInString', courseSectionsRequestInString)
+            formData.append('file', selectedFile)
+
+            const upload = await axios.post(`${apiURL}sections`, formData, header)
+            console.log(upload);
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
 
@@ -64,14 +84,14 @@ const Create = () => {
 
                                     {/* Category Name */}
                                     <div className="form-group mb-3">
-                                        {errors.category_name && errors.category_name.message ? (
-                                            <small className="text-danger">{errors.category_name && errors.category_name.message}</small>
+                                        {errors.sectionName && errors.sectionName.message ? (
+                                            <small className="text-danger">{errors.sectionName && errors.sectionName.message}</small>
                                         ) : <small>Category Name</small>
                                         }
 
                                         <input
                                             type="text"
-                                            name="category_name"
+                                            name="sectionName"
                                             className="form-control shadow-none"
                                             placeholder="Category Name"
                                             ref={register({
@@ -82,13 +102,13 @@ const Create = () => {
 
                                     {/* Details */}
                                     <div className="form-group mb-3">
-                                        {errors.category_details && errors.category_details.message ? (
-                                            <small className="text-danger">{errors.category_details && errors.category_details.message}</small>
+                                        {errors.sectionDescription && errors.sectionDescription.message ? (
+                                            <small className="text-danger">{errors.sectionDescription && errors.sectionDescription.message}</small>
                                         ) : <small>Category Details</small>
                                         }
 
                                         <textarea
-                                            name="category_details"
+                                            name="sectionDescription"
                                             className="form-control shadow-none"
                                             placeholder="Category Details"
                                             rows="5"
