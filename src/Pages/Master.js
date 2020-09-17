@@ -14,6 +14,7 @@ import CategoryEdit from '../Pages/Category/Edit';
 import CourseIndex from '../Pages/Course/Index';
 import CourseEdit from '../Pages/Course/Edit';
 import CourseCreate from '../Pages/Course/Create';
+import CourseShow from '../Pages/Course/Show';
 import InstructorIndex from '../Pages/Instructor/Index';
 import InstructorCreate from '../Pages/Instructor/Create';
 import learnerIndex from '../Pages/Learners/Index';
@@ -77,6 +78,8 @@ const Master = () => {
                     <Route exact path="/admin/all-course" component={CourseIndex} />
                     <Route exact path="/admin/course/:id/edit" component={CourseEdit} />
                     <Route exact path="/admin/course/create" component={CourseCreate} />
+                    <Route exact path="/admin/course/:id/show" component={CourseShow} />
+
                     <Route exact path="/admin/instructor" component={InstructorIndex} />
                     <Route exact path="/admin/instructor/create" component={InstructorCreate} />
                     <Route exact path="/admin/learners" component={learnerIndex} />

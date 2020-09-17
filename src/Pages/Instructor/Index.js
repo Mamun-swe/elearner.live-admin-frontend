@@ -13,6 +13,14 @@ const Index = () => {
     const [scrolled, setScrolled] = useState(true)
     const [loading, setLoading] = useState(false)
 
+    // Header 
+    const header = {
+        headers:
+        {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
+    }
+
 
     const onChangeInstructorsFilter = event => {
         const status = Boolean(event.target.value)
@@ -34,10 +42,10 @@ const Index = () => {
         const fetchInstructors = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}admin/instructors`)
+                const response = await axios.get(`${apiURL}admin/instructors`, header)
                 setInstructors(response.data)
                 setLoading(false)
-                // console.log(response.data)
+                console.log(response.data)
             } catch (error) {
                 console.log(error)
             }

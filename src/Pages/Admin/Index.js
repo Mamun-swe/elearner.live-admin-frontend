@@ -23,13 +23,18 @@ const Index = () => {
             }
         })
 
-        const fetchAdmins = () => {
-            setLoading(true)
-            axios.get(`${apiURL}users`)
-                .then(res => {
-                    setAdmins(res.data)
-                    setLoading(false)
-                })
+        const fetchAdmins = async () => {
+            try {
+                // setLoading(true)
+                // axios.get(`${apiURL}users`)
+                //     .then(res => {
+                //         setAdmins(res.data)
+                //         setLoading(false)
+                //     })
+                const response = await axios.get(`${apiURL}users`)
+            } catch (error) {
+                if (error) console.log(error.message)
+            }
         }
 
         fetchAdmins()
@@ -40,7 +45,7 @@ const Index = () => {
         <div className="index">
             {loading ?
                 <p>Loading...</p> :
-                
+
                 <div className="container-fluid">
                     <div className="row">
 

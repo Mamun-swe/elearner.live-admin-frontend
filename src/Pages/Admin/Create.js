@@ -4,10 +4,16 @@ import { useForm } from "react-hook-form";
 import { Icon } from 'react-icons-kit';
 import { Link } from 'react-router-dom';
 import { ic_keyboard_arrow_left } from 'react-icons-kit/md';
+import axios from 'axios';
+import { apiURL } from '../../utils/apiUrl';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure({ autoClose: 2000 })
 const Create = () => {
     const { register, handleSubmit, errors } = useForm()
     const [scrolled, setScrolled] = useState(true)
+    const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -20,8 +26,17 @@ const Create = () => {
         })
     })
 
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        try {
+            setLoading(true)
+            const createAdmin = await axios.post(`${apiURL}sign-up/admin`, data)
+            if (createAdmin.status === 201) {
+                setLoading(false)
+                toast.success('Successfully Admin Created')
+            }
+        } catch (error) {
+            if (error) console.log(error.message)
+        }
     }
 
     return (
@@ -95,14 +110,14 @@ const Create = () => {
                                         {/* Phone */}
                                         <div className="col-12 col-lg-6">
                                             <div className="form-group mb-3">
-                                                {errors.phone && errors.phone.message ? (
-                                                    <small className="text-danger">{errors.phone && errors.phone.message}</small>
+                                                {errors.phoneNo && errors.phoneNo.message ? (
+                                                    <small className="text-danger">{errors.phoneNo && errors.phoneNo.message}</small>
                                                 ) : <small>Phone</small>
                                                 }
 
                                                 <input
-                                                    type="number"
-                                                    name="phone"
+                                                    type="text"
+                                                    name="phoneNo"
                                                     className="form-control shadow-none"
                                                     placeholder="01xxxxxxxxx"
                                                     ref={register({
@@ -113,7 +128,7 @@ const Create = () => {
                                         </div>
 
                                         {/* Role */}
-                                        <div className="col-12 col-lg-6">
+                                        {/* <div className="col-12 col-lg-6">
                                             <div className="form-group mb-3">
                                                 {errors.role && errors.role.message ? (
                                                     <small className="text-danger">{errors.role && errors.role.message}</small>
@@ -131,11 +146,11 @@ const Create = () => {
                                                     <option>Admin</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> */}
 
 
                                         {/* Password */}
-                                        <div className="col-12">
+                                        <div className="col-12 col-lg-6">
                                             <div className="form-group mb-3">
                                                 {errors.password && errors.password.message ? (
                                                     <small className="text-danger">{errors.password && errors.password.message}</small>
@@ -155,7 +170,9 @@ const Create = () => {
                                         </div>
 
                                         <div className="col-12 text-right">
-                                            <button type="submit" className="btn shadow-none">Submit</button>
+                                            <button type="submit" className="btn shadow-none">
+                                                {isLoading ? <span>Adding...</span> : <span>Submit</span>}
+                                            </button>
                                         </div>
 
                                     </div>

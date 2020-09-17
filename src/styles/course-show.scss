@@ -1,0 +1,92 @@
+@import "../App.scss";
+
+.show-course {
+    .title-bar {
+        .btn {
+            color: #555;
+            padding: 5px;
+            background: rgba(85, 85, 85, 0.075);
+        }
+
+        .btn:hover {
+            background: rgba(85, 85, 85, 0.226);
+        }
+
+        h5 {
+            color: $primary-color;
+        }
+    }
+
+    .content {
+        h5 {
+            font-family: Barlow-Bold;
+        }
+
+        small {
+            font-family: Barlow-Regular;
+            color: $primary-color;
+        }
+
+        .btn {
+            color: #fff;
+            font-size: 16px;
+            font-family: Barlow-Medium;
+            background: $primary-color;
+            padding: 6px 20px;
+            border-radius: 5px;
+        }
+
+        .schedule {
+            h6 {
+                font-family: Barlow-Bold;
+                color: $primary-color;
+                margin-bottom: 7px;
+            }
+
+            p {
+                font-size: 15px;
+                line-height: 1.5rem;
+                font-family: Barlow-Regular;
+            }
+        }
+
+        p {
+            color: #000;
+            font-size: 16px;
+            line-height: 2rem;
+            margin-bottom: 30px;
+        }
+
+        // FAQ
+        .faqs {
+            .card {
+                border: 0;
+                border-radius: 0;
+
+                .card-header {
+                    border: 0;
+                    padding: 10px;
+                    border-radius: 0;
+                    background: #e2e2e269;
+                    border-bottom: 1px solid #fff;
+                    cursor: pointer;
+
+                    h5 {
+                        font-family: primary-font;
+                        color: $primary-color;
+                    }
+                }
+
+                .card-body {
+                    padding: 10px;
+
+                    p {
+                        font-size: 15px;
+                        margin-bottom: 0;
+                        line-height: 1.8rem;
+                    }
+                }
+            }
+        }
+    }
+}

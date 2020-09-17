@@ -26,10 +26,11 @@ const Index = () => {
 
         const fetchEngineers = () => {
             setLoading(true)
-            axios.get(`${apiURL}users`)
+            axios.get(`${apiURL}partners`)
                 .then(res => {
                     setEngineers(res.data)
                     setLoading(false)
+                    console.log(res.data);
                 })
         }
 

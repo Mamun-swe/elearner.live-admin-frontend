@@ -33,7 +33,7 @@ const CategoryTable = ({ categories }) => {
             if (response.status === 200) {
                 setLoading(false)
                 setShow(false)
-                toast.success('Successfully Section Created')
+                toast.info('Successfully Section Delete')
             }
         } catch (error) {
             if (error) console.log(error)
