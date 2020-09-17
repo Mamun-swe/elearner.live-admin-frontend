@@ -6,6 +6,7 @@ import { apiURL } from '../../utils/apiUrl';
 import { Icon } from 'react-icons-kit';
 import { ic_add } from 'react-icons-kit/md';
 import CategoryTable from '../../Components/CategoryTable';
+import LoadinComponent from '../../Components/Loading';
 
 const Index = () => {
     const [categories, setCategories] = useState([])
@@ -28,7 +29,6 @@ const Index = () => {
                 const response = await axios.get(`${apiURL}sections`)
                 setCategories(response.data.sections)
                 setLoading(false)
-                console.log(response.data.sections);
             } catch (error) {
                 if (error) {
                     console.log(error)
@@ -42,7 +42,7 @@ const Index = () => {
     return (
         <div className="index">
             {loading ?
-                <p>Loading...</p> :
+                <LoadinComponent /> :
 
                 <div className="container-fluid">
                     <div className="row">

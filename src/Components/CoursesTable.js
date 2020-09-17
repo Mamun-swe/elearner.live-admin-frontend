@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { Icon } from 'react-icons-kit';
 import {
     view,
-    view_off,
     pen_1,
     bin
 } from 'react-icons-kit/ikons';
+import { toggleFilled, toggle } from 'react-icons-kit/ionicons';
 import Modal from 'react-bootstrap/Modal';
-import MobileImg from '../assets/mobile.png';
 
 const CoursesTable = ({ courses }) => {
     const [show, setShow] = useState(false);
@@ -30,14 +29,14 @@ const CoursesTable = ({ courses }) => {
             {courses.length > 0 && courses.map((course, i) =>
                 <div className="d-lg-flex border-bottom py-3" key={i}>
                     <div className="p-1">
-                        <img src={MobileImg} className="img-fluid" alt="..." />
+                        <img src={course.imageDetails.imageUrl} className="img-fluid" alt="..." />
                     </div>
                     <div className="p-2 content">
-                        <h5>Mobile app development with react native</h5>
+                        <h5>{course.courseName}</h5>
                         <ul>
-                            <li><p><span>Enrollment:</span> 100</p></li>
-                            <li className="pl-lg-3"><p><span>Pre-Register:</span> 100</p></li>
-                            <li className="pl-lg-3"><p><span>Instructor Name:</span> Abdullah Al Mamun</p></li>
+                            <li><p><span>Enrollment:</span> {course.length}</p></li>
+                            {/* <li className="pl-lg-3"><p><span>Pre-Register:</span> 100</p></li> */}
+                            <li className="pl-lg-3"><p><span>Instructor Name:</span> {course.courseInstructorName}</p></li>
                         </ul>
                         <small className="d-lg-none">Last updated on 12 aug</small>
                     </div>
@@ -48,15 +47,19 @@ const CoursesTable = ({ courses }) => {
                                     <Icon icon={view} size={20} />
                                 </button>
                             </li>
-                            {/* <li>
-                                <button type="button" className="btn btn-light rounded-circle shadow-none">
-                                    <Icon icon={view_off} size={20} />
-                                </button>
-                            </li> */}
                             <li>
                                 <button type="button" className="btn btn-light rounded-circle shadow-none">
                                     <Icon icon={pen_1} size={20} />
                                 </button>
+                                {course.isPublish ?
+                                    <button type="button" className="btn rounded-circle shadow-none">
+                                        <Icon icon={toggleFilled} size={35} />
+                                    </button>
+                                    :
+                                    <button type="button" className="btn rounded-circle shadow-none">
+                                        <Icon icon={toggle} size={35} />
+                                    </button>
+                                }
                             </li>
                             <li>
                                 <button

@@ -3,24 +3,41 @@ import { Icon } from 'react-icons-kit';
 import { pen_1, bin } from 'react-icons-kit/ikons';
 import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { apiURL } from '../utils/apiUrl';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import MobileImg from '../assets/mobile.png';
-
-const descp = "ভারত দক্ষিণ এশিয়ার একটি রাষ্ট্র। ভৌগোলিক আয়তনের বিচারে এটি দক্ষিণ এশিয়ার বৃহত্তম এবং বিশ্বের সপ্তম বৃহৎ রাষ্ট্র। অন্যদিকে জনসংখ্যার বিচারে এটি বিশ্বের দ্বিতীয় সর্বাধিক জনবহুল তথা বৃহত্তম গণত্রান্ত্রিক রাষ্ট্র। সুপ্রাচীন কাল থেকেই ভারতীয় উপমহাদেশ অর্থনৈতিক সমৃদ্ধ ও সাংস্ক্রিতিক ঐতিহ্যের জন্য সুপরিচিত। ভারত দক্ষিণ এশিয়ার একটি রাষ্ট্র। ভৌগোলিক আয়তনের বিচারে এটি দক্ষিণ এশিয়ার বৃহত্তম এবং বিশ্বের সপ্তম বৃহৎ রাষ্ট্র। অন্যদিকে জনসংখ্যার বিচারে এটি বিশ্বের দ্বিতীয় সর্বাধিক জনবহুল তথা বৃহত্তম গণত্রান্ত্রিক রাষ্ট্র। সুপ্রাচীন কাল থেকেই ভারতীয় উপমহাদেশ অর্থনৈতিক সমৃদ্ধ ও সাংস্ক্রিতিক ঐতিহ্যের জন্য সুপরিচিত।";
-
+toast.configure({ autoClose: 2000 })
 const CategoryTable = ({ categories }) => {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
     const [deleteId, setDeleteId] = useState()
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
+
+    // Header 
+    const header = {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
+    }
 
     const openModal = id => {
         setDeleteId(id)
         setShow(true)
     }
 
-    const submitDelete = () => {
-        setLoading(true)
-        alert(deleteId)
+    const submitDelete = async () => {
+        try {
+            setLoading(true)
+            const response = await axios.delete(`${apiURL}/sections/${deleteId}`, header)
+            if (response.status === 200) {
+                setLoading(false)
+                setShow(false)
+                toast.success('Successfully Section Created')
+            }
+        } catch (error) {
+            if (error) console.log(error)
+        }
     }
 
 
@@ -38,21 +55,18 @@ const CategoryTable = ({ categories }) => {
                         </td>
                     </tr>
                 </thead>
-
-
                 <tbody>
-
                     {categories.length > 0 && categories.map((category, i) =>
                         <tr key={i}>
                             <td><p>{i + 1}</p></td>
                             <td>
-                                <img src={MobileImg} className="img-fluid" alt="..." />
+                                <img src={category.imageDetails.imageUrl} className="img-fluid" alt="..." />
                             </td>
                             <td><p>{category.sectionName}</p></td>
                             <td>
                                 <p>
                                     {category.sectionDetails ?
-                                        category.sectionDetails.slice(0, 130)+'...'
+                                        category.sectionDetails.slice(0, 130) + '...'
                                         : null
                                     }
                                 </p>
@@ -75,7 +89,6 @@ const CategoryTable = ({ categories }) => {
                             </td>
                         </tr>
                     )}
-
                 </tbody>
             </table>
 

@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from 'react-icons-kit';
-import { circle_ok, circle_pause, bin } from 'react-icons-kit/ikons';
+import { bin, view } from 'react-icons-kit/ikons';
+import { toggleFilled, toggle } from 'react-icons-kit/ionicons';
 import Modal from 'react-bootstrap/Modal';
-import InstructorImg from '../assets/me.jpg';
 
 const InstructorTable = ({ instructors }) => {
     const [show, setShow] = useState(false);
     const [deleteId, setDeleteId] = useState()
-    const [loading, setLoading] = useState(false);
+    const [allInstructors, setAllInstructors] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const openModal = id => {
         setDeleteId(id)
         setShow(true)
     }
+
+    useEffect(() => {
+        setAllInstructors(instructors)
+    }, [instructors])
 
     const submitDelete = () => {
         setLoading(true)
@@ -22,30 +27,36 @@ const InstructorTable = ({ instructors }) => {
     return (
         <div className="data">
 
-            {instructors.length > 0 && instructors.map((instructor, i) =>
+            {allInstructors.length > 0 && allInstructors.map((instructor, i) =>
                 <div className="d-lg-flex border rounded p-3 mb-3" key={i}>
                     <div className="p-1 image-frame rounded-circle">
-                        <img src={InstructorImg} className="img-fluid" alt="..." />
+                        <img src={instructor.imageDetails.imageUrl} className="img-fluid" alt="..." />
                     </div>
                     <div className="p-2 content">
-                        <h5 className="text-capitalize">abdullah al mamun</h5>
+                        <h5 className="text-capitalize">{instructor.name}</h5>
                         <ul>
                             <li><p><span>Enrollment courses:</span> 100</p></li>
-                            <li className="pl-lg-3"><p><span>Cheif Instructor</span></p></li>
+                            <li className="pl-lg-3"><p><span>{instructor.qualificationInfo.designation}</span></p></li>
                         </ul>
-                        <small className="d-lg-none">Instructor Added by Mamun</small>
+                        <small className="d-lg-none">Instructor Added by Admin</small>
                     </div>
                     <div className="ml-auto buttons">
                         <ul>
-                            {/* <li>
-                                <button type="button" className="btn btn-light rounded-circle shadow-none">
-                                    <Icon icon={view_off} size={20} />
-                                </button>
-                            </li> */}
                             <li>
                                 <button type="button" className="btn btn-light rounded-circle shadow-none">
-                                    <Icon icon={circle_pause} size={20} />
+                                    <Icon icon={view} size={20} />
                                 </button>
+                            </li>
+                            <li>
+                                {instructor.isActive ?
+                                    <button type="button" className="btn rounded-circle shadow-none">
+                                        <Icon icon={toggleFilled} size={35} />
+                                    </button>
+                                    :
+                                    <button type="button" className="btn rounded-circle shadow-none">
+                                        <Icon icon={toggle} size={35} />
+                                    </button>
+                                }
                             </li>
                             <li>
                                 <button
@@ -57,7 +68,7 @@ const InstructorTable = ({ instructors }) => {
                                 </button>
                             </li>
                         </ul>
-                        <small className="d-none d-lg-block mt-lg-2">Instructor Added by Mamun</small>
+                        <small className="d-none d-lg-block mt-lg-2">Instructor Added by Admin</small>
                     </div>
                 </div>
             )}

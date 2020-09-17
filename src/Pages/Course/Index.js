@@ -3,12 +3,12 @@ import '../../styles/all-index.scss';
 import { apiURL } from '../../utils/apiUrl';
 import axios from 'axios';
 import CourseTable from '../../Components/CoursesTable';
+import LoadingComponent from '../../Components/Loading';
 
 const Index = () => {
     const [courses, setCourses] = useState([])
     const [scrolled, setScrolled] = useState(true)
     const [loading, setLoading] = useState(false)
-
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -20,13 +20,16 @@ const Index = () => {
             }
         })
 
-        const fetchCourses = () => {
-            setLoading(true)
-            axios.get(`${apiURL}users`)
-                .then(res => {
-                    setCourses(res.data)
-                    setLoading(false)
-                })
+        const fetchCourses = async () => {
+            try {
+                setLoading(true)
+                const response = await axios.get(`${apiURL}courses`)
+                setCourses(response.data.items)
+                setLoading(false)
+                // console.log(response.data.items)
+            } catch (error) {
+                if (error) console.log(error)
+            }
         }
 
         fetchCourses()
@@ -35,7 +38,7 @@ const Index = () => {
     return (
         <div className="index">
             {loading ?
-                <p>Loading...</p> :
+                <LoadingComponent /> :
 
                 <div className="container-fluid">
                     <div className="row">

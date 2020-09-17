@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../styles/all-create.scss";
-import {useForm} from "react-hook-form";
-import {Icon} from 'react-icons-kit';
-import {Link} from 'react-router-dom';
-import {ic_camera_alt, ic_keyboard_arrow_left} from 'react-icons-kit/md';
+import { useForm } from "react-hook-form";
+import { Icon } from 'react-icons-kit';
+import { Link } from 'react-router-dom';
+import { ic_camera_alt, ic_keyboard_arrow_left } from 'react-icons-kit/md';
 import axios from 'axios';
-import {apiURL} from '../../utils/apiUrl';
+import { apiURL } from '../../utils/apiUrl';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure({ autoClose: 2000 })
 const Create = () => {
     const { register, handleSubmit, errors } = useForm()
     const [scrolled, setScrolled] = useState(true)
@@ -16,8 +19,9 @@ const Create = () => {
     // Header 
     const header = {
         headers:
-            {Authorization: "Bearer " + localStorage.getItem("token")}
-
+        {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
     }
 
     useEffect(() => {
@@ -42,17 +46,17 @@ const Create = () => {
 
     const onSubmit = async (data) => {
         try {
-            let courseSectionsRequestInString= "{\"sectionName\":\""+data.sectionName+"\",\"sectionName\":\""+data.sectionDescription+"\"}";
-
-            console.log(courseSectionsRequestInString)
-            console.log(localStorage.getItem("token"));
+            let courseSectionsRequestInString =
+                "{\"sectionName\":\"" + data.sectionName + "\",\"sectionDetails\":\"" + data.sectionDetails + "\"}";
 
             let formData = new FormData()
             formData.append('courseSectionsRequestInString', courseSectionsRequestInString)
             formData.append('file', selectedFile)
 
             const upload = await axios.post(`${apiURL}sections`, formData, header)
-            console.log(upload);
+            if (upload.status === 201) {
+                toast.success('Successfully Section Created')
+            }
         } catch (error) {
             console.log(error.message);
         }
@@ -102,13 +106,13 @@ const Create = () => {
 
                                     {/* Details */}
                                     <div className="form-group mb-3">
-                                        {errors.sectionDescription && errors.sectionDescription.message ? (
-                                            <small className="text-danger">{errors.sectionDescription && errors.sectionDescription.message}</small>
+                                        {errors.sectionDetails && errors.sectionDetails.message ? (
+                                            <small className="text-danger">{errors.sectionDetails && errors.sectionDetails.message}</small>
                                         ) : <small>Category Details</small>
                                         }
 
                                         <textarea
-                                            name="sectionDescription"
+                                            name="sectionDetails"
                                             className="form-control shadow-none"
                                             placeholder="Category Details"
                                             rows="5"

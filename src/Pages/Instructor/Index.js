@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Icon } from 'react-icons-kit';
 import { ic_add } from 'react-icons-kit/md';
-
+import LoadingComponent from '../../Components/Loading';
 import InstructorTable from '../../Components/InstructorTable';
 
 const Index = () => {
@@ -13,6 +13,13 @@ const Index = () => {
     const [scrolled, setScrolled] = useState(true)
     const [loading, setLoading] = useState(false)
 
+
+    const onChangeInstructorsFilter = event => {
+        const status = Boolean(event.target.value)
+        console.log(status);
+        const filteredInstructros = instructors.filter(instructor => instructor.isActive === status)
+        console.log(filteredInstructros)
+    }
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -24,13 +31,16 @@ const Index = () => {
             }
         })
 
-        const fetchInstructors = () => {
-            setLoading(true)
-            axios.get(`${apiURL}users`)
-                .then(res => {
-                    setInstructors(res.data)
-                    setLoading(false)
-                })
+        const fetchInstructors = async () => {
+            try {
+                setLoading(true)
+                const response = await axios.get(`${apiURL}admin/instructors`)
+                setInstructors(response.data)
+                setLoading(false)
+                // console.log(response.data)
+            } catch (error) {
+                console.log(error)
+            }
         }
 
         fetchInstructors()
@@ -40,7 +50,7 @@ const Index = () => {
     return (
         <div className="index">
             {loading ?
-                <p>Loading...</p> :
+                <LoadingComponent /> :
 
                 <div className="container-fluid">
                     <div className="row">
@@ -51,9 +61,12 @@ const Index = () => {
                                 <div className="card-body p-3">
                                     <div className="d-flex">
                                         <div className="ml-auto pr-2">
-                                            <select className="form-control shadow-none">
-                                                <option>Pending</option>
-                                                <option>Added</option>
+                                            <select
+                                                className="form-control shadow-none"
+                                                onChange={onChangeInstructorsFilter}
+                                            >
+                                                <option value={false}>Pending</option>
+                                                <option value={true}>Added</option>
                                             </select>
                                         </div>
                                         <div>

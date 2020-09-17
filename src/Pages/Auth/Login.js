@@ -21,7 +21,7 @@ const Login = () => {
             const response = await axios.post(`${apiURL}login`, data)
             if (response.status === 200 && response.data.token) {
                 const user = jwt_decode(response.data.token)
-                if (user.scopes[0] === 'ADMIN') {
+                if (user.scopes[0] === 'ADMIN' || 'ROLE_ADMIN') {
                     localStorage.setItem("token", response.data.token)
                     setLoading(false)
                     history.push('/admin')
