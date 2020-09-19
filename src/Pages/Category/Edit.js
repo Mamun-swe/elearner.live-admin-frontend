@@ -172,12 +172,12 @@ const Edit = () => {
                                                 : null} */}
                                         </div>
 
-                                        {selectedFile && selectedFile.size > 50000 ?
+                                        {selectedFile && selectedFile.size > 100000 ?
                                             <p className="text-danger mb-0">Select less than 50 Kb file</p>
                                             : null}
 
                                         <div className="text-right mt-3">
-                                            {selectedFile && selectedFile.size < 50000 && previewURL ?
+                                            {selectedFile && selectedFile.size < 100000 && previewURL ?
                                                 <button type="submit" className="btn shadow-none">Update</button>
                                                 : null}
                                         </div>

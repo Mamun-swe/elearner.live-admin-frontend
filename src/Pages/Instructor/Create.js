@@ -278,11 +278,11 @@ const Create = () => {
                                                             </div>
                                                         </label>
                                                     </div>
-                                                    {selectedFile && selectedFile.size > 5000000 ? (
+                                                    {selectedFile && selectedFile.size > 100000 ? (
                                                         <div className="px-2">
                                                             <p className="text-danger mb-0">Select less than 500KB file.</p>
                                                         </div>
-                                                    ) : selectedFile && selectedFile.size < 5000000 && previewURL ? (
+                                                    ) : selectedFile && selectedFile.size < 100000 && previewURL ? (
                                                         <div className="px-2">
                                                             <img src={previewURL} className="img-fluid border" alt="..." />
                                                         </div>
@@ -292,7 +292,7 @@ const Create = () => {
                                         </div>
 
                                         <div className="col-12 text-right">
-                                            {selectedFile && selectedFile.size < 5000000 && previewURL ?
+                                            {selectedFile && selectedFile.size < 100000 && previewURL ?
                                                 <button type="submit" className="btn shadow-none">
                                                     {isLoading ? <span>Adding...</span> : <span>Submit</span>}
                                                 </button>
