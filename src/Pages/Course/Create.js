@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../styles/all-create.scss";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 import CKEditor from "react-ckeditor-component";
-import { Icon } from 'react-icons-kit';
-import { ic_camera_alt } from 'react-icons-kit/md';
-import { androidAdd, androidRemove } from 'react-icons-kit/ionicons/';
+import {Icon} from 'react-icons-kit';
+import {ic_camera_alt} from 'react-icons-kit/md';
+import {androidAdd, androidRemove} from 'react-icons-kit/ionicons/';
 import axios from 'axios';
-import { apiURL } from '../../utils/apiUrl';
-import { toast } from 'react-toastify';
+import {apiURL} from '../../utils/apiUrl';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Select from 'react-select';
 
-toast.configure({ autoClose: 2000 })
+toast.configure({autoClose: 2000})
 const Create = () => {
-    const { register, handleSubmit, errors } = useForm();
-    const [content, setContent] = useState("কি কি শিখব এই কোর্সে ?")
+    const {register, handleSubmit, errors} = useForm();
+    const [content, setContent] = useState()
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewURL, setPreviewURL] = useState(null)
     const [categories, setCategories] = useState([])
@@ -186,7 +186,7 @@ const Create = () => {
                                                     type="text"
                                                     name="courseName"
                                                     className="form-control shadow-none"
-                                                    placeholder="Course Name"
+                                                    placeholder="Advance Android App Development"
                                                     ref={register({
                                                         required: "Course Name is Require*",
                                                     })}
@@ -194,24 +194,7 @@ const Create = () => {
                                             </div>
                                         </div>
 
-                                        {/* Course Orientation Date */}
-                                        <div className="col-12 col-lg-6">
-                                            <div className="form-group mb-3">
-                                                {errors.courseOrientationDate && errors.courseOrientationDate.message ? (
-                                                    <small className="text-danger">{errors.courseOrientationDate && errors.courseOrientationDate.message}</small>
-                                                ) : <small>Course Start Date</small>
-                                                }
 
-                                                <input
-                                                    type="date"
-                                                    name="courseOrientationDate"
-                                                    className="form-control shadow-none"
-                                                    ref={register({
-                                                        required: "Course Orientation Date is Require*",
-                                                    })}
-                                                />
-                                            </div>
-                                        </div>
 
 
                                         {/* Course Start Date */}
@@ -252,11 +235,32 @@ const Create = () => {
                                             </div>
                                         </div>
 
+                                        {/* Course Orientation Date */}
+                                        <div className="col-12 col-lg-6">
+                                            <div className="form-group mb-3">
+                                                {errors.courseOrientationDate && errors.courseOrientationDate.message ? (
+                                                    <small
+                                                        className="text-danger">{errors.courseOrientationDate && errors.courseOrientationDate.message}</small>
+                                                ) : <small>Orientation Class</small>
+                                                }
+
+                                                <input
+                                                    type="date"
+                                                    name="courseOrientationDate"
+                                                    className="form-control shadow-none"
+                                                    ref={register({
+                                                        required: "Course Orientation Date is Require*",
+                                                    })}
+                                                />
+                                            </div>
+                                        </div>
+
                                         {/* Learner Limitation */}
                                         <div className="col-12 col-lg-6">
                                             <div className="form-group mb-3">
                                                 {errors.courseMaxNumberOfLearner && errors.courseMaxNumberOfLearner.message ? (
-                                                    <small className="text-danger">{errors.courseMaxNumberOfLearner && errors.courseMaxNumberOfLearner.message}</small>
+                                                    <small
+                                                        className="text-danger">{errors.courseMaxNumberOfLearner && errors.courseMaxNumberOfLearner.message}</small>
                                                 ) : <small>Learner Limitation</small>
                                                 }
 
@@ -264,7 +268,7 @@ const Create = () => {
                                                     type="number"
                                                     name="courseMaxNumberOfLearner"
                                                     className="form-control shadow-none"
-                                                    placeholder="Max Number of Learners"
+                                                    placeholder="30"
                                                     ref={register({
                                                         required: "Learner Limitation is Require*",
                                                     })}
@@ -284,7 +288,7 @@ const Create = () => {
                                                     type="text"
                                                     name="courseTotalDurationInDays"
                                                     className="form-control shadow-none"
-                                                    placeholder="Course Duration in Days"
+                                                    placeholder="3 weeks"
                                                     ref={register({
                                                         required: "Course Duration is Require*",
                                                     })}
@@ -304,7 +308,7 @@ const Create = () => {
                                                     type="number"
                                                     name="courseNumberOfClasses"
                                                     className="form-control shadow-none"
-                                                    placeholder="Total Number of Classes"
+                                                    placeholder="12"
                                                     ref={register({
                                                         required: "Total Class is Require*",
                                                     })}
@@ -324,7 +328,7 @@ const Create = () => {
                                                     type="text"
                                                     name="courseClassDuration"
                                                     className="form-control shadow-none"
-                                                    placeholder="Course Class Duration"
+                                                    placeholder="2:00hrs"
                                                     ref={register({
                                                         required: "Class Duration is Require*",
                                                     })}
@@ -359,7 +363,7 @@ const Create = () => {
                                                     type="number"
                                                     name="coursePriceInTk"
                                                     className="form-control shadow-none"
-                                                    placeholder="Regular Course Price"
+                                                    placeholder="8000"
                                                     ref={register({
                                                         required: "Regular Course Price is Require*",
                                                     })}
@@ -462,7 +466,6 @@ const Create = () => {
                                                 <textarea
                                                     name="why_do_this_course"
                                                     className="form-control shadow-none"
-                                                    placeholder="কেন করব এই কোর্স ?"
                                                     rows="5"
                                                     ref={register({
                                                         required: "This field is Require*",
@@ -485,7 +488,7 @@ const Create = () => {
                                                     className="form-control shadow-none"
                                                     placeholder="Youtube Embaded Link"
                                                     ref={register({
-                                                        required: "Youtube Embaded Link is Require*",
+                                                        required: "Youtube Embedded Link is Require*",
                                                     })}
                                                 />
                                             </div>
