@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../styles/course-show.scss';
-import { useHistory, useParams } from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
-import { apiURL } from '../../utils/apiUrl';
-import { Icon } from 'react-icons-kit';
-import { ic_keyboard_backspace, ic_mail } from 'react-icons-kit/md';
+import {apiURL} from '../../utils/apiUrl';
+import {Icon} from 'react-icons-kit';
+import {ic_keyboard_backspace, ic_mail} from 'react-icons-kit/md';
 import Collapse from 'react-bootstrap/Collapse';
 import LoadingComponent from '../../Components/Loading';
+import Modal from "react-bootstrap/Modal";
+import {useForm} from "react-hook-form";
 
 
 const Show = () => {
     const { id } = useParams()
     const history = useHistory()
+    const {register, handleSubmit, errors} = useForm()
     const [loading, setLoading] = useState(false)
     const [course, setCourse] = useState({})
     const [open1, setOpen1] = useState(false)
@@ -28,6 +31,14 @@ const Show = () => {
     const [fridays, setFridays] = useState([])
     const [learners, setLearners] = useState([])
     const [offer, setOffer] = useState({})
+    const [showModal, setShowModal] = useState(false);
+    const [requestedEmail, setRequestedEmail] = useState('');
+
+    const openModal = email => {
+        console.log(email)
+        setRequestedEmail(email)
+        setShowModal(true)
+    }
 
     useEffect(() => {
         // Fetch Single Course 
@@ -35,6 +46,7 @@ const Show = () => {
             try {
                 setLoading(true)
                 const response = await axios.get(`${apiURL}courses/${id}`)
+                console.log(response.data)
                 setCourse(response.data)
                 setSaturdays(response.data.courseClassTimeSchedule.saturdays)
                 setSundays(response.data.courseClassTimeSchedule.sundays)
@@ -54,7 +66,10 @@ const Show = () => {
 
         fetchCourse()
     }, [id])
-
+    const sentEmail = () => {
+        setLoading(true)
+        alert(requestedEmail)
+    }
 
     return (
         <div className="show-course">
@@ -96,7 +111,7 @@ const Show = () => {
                                 <div>
                                     <h5 className="mb-0">
                                         <del className="text-muted">{course.coursePriceInTk} tk</del>
-                                        <span className="text-success ml-3">{course.coursePriceInTk} tk</span>
+                                        <span className="text-success ml-3">{course.coursePriceInTkWithOffer} tk</span>
                                     </h5>
                                     <small>*{offer.specialOfferReason}</small>
                                 </div>
@@ -129,13 +144,14 @@ const Show = () => {
 
                                     <div className="col-12 text-sm-right">
                                         <p className="text-success mb-0">
-                                            * {course.registeredLearners ? course.registeredLearners.length : '0'} students already enrollmented on this course</p>
+                                            * {course.registeredLearners ? course.registeredLearners.length : '0'} students
+                                            already enrollment on this course</p>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <p>Basic about of course goes to here</p>
+                            <p>{course.courseBasicDescription}</p>
 
 
                             {/* FAQ's */}
@@ -172,7 +188,7 @@ const Show = () => {
 
                                     <Collapse in={open2}>
                                         <div className="card-body" id="collapse-2">
-                                            <p>Why do this course goes to here</p>
+                                            <p>{course.courseWhyDo}</p>
                                         </div>
                                     </Collapse>
                                 </div>
@@ -322,14 +338,14 @@ const Show = () => {
                                                     {learners.length > 0 &&
                                                         learners.map((learner, i) =>
                                                             <tr key={i}>
-                                                                <td><p>{learner.learnerId}</p></td>
-                                                                <td><p>{learner.learnerId}</p></td>
+                                                                <td><p>{learner.learnerName}</p></td>
+                                                                <td><p>{learner.learnerPhoneNO}</p></td>
                                                                 <td><p>{learner.paid} tk.</p></td>
                                                                 <td className="text-center">
                                                                     <button
                                                                         type="button"
                                                                         className="btn btn-light btn-sm shadow-none px-2 py-1"
-                                                                    >
+                                                                        onClick={() => openModal(learner.learnerEmail)}>
                                                                         <Icon icon={ic_mail} size={25} />
                                                                     </button>
                                                                 </td>
@@ -344,7 +360,41 @@ const Show = () => {
                             </div>
                         </div>
                     </div>
-
+                    {/* Email Modal */}
+                    <Modal
+                        show={showModal}
+                        centered
+                        onHide={() => setShowModal(false)}
+                        className="custom-modal"
+                    >
+                        <Modal.Header closeButton className="border-0 pb-0">
+                        </Modal.Header>
+                        <Modal.Body className="pb-4 px-4">
+                            <form>
+                                <h5 className="mb-4">Message Box</h5>
+                                <textarea
+                                    name="sectionDetails"
+                                    className="form-control shadow-none"
+                                    rows="5"
+                                    ref={register({
+                                        required: "Category Details is Require*",
+                                    })}
+                                />
+                                <div className="mt-3">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary shadow-none px-4 text-white"
+                                        onClick={sentEmail}
+                                    >
+                                        {loading ? <span>Sanding...</span> : <span>Sand</span>}
+                                    </button>
+                                    <button type="button" className="btn btn-light shadow-none px-4 ml-2 text-dark"
+                                            onClick={() => setShowModal(false)}>Close
+                                    </button>
+                                </div>
+                            </form>
+                        </Modal.Body>
+                    </Modal>
                 </div>
             </div>
         </div>
