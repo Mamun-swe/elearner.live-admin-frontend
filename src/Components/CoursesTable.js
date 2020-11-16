@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Icon } from 'react-icons-kit';
-import { view, pen_1, bin } from 'react-icons-kit/ikons';
-import { toggleFilled, toggle } from 'react-icons-kit/ionicons';
-import { ic_local_offer } from 'react-icons-kit/md/';
+import React, {useState} from 'react';
+import {Icon} from 'react-icons-kit';
+import {bin, pen_1, view} from 'react-icons-kit/ikons';
+import {toggle, toggleFilled} from 'react-icons-kit/ionicons';
+import {ic_local_offer} from 'react-icons-kit/md/';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
-import { apiURL } from '../utils/apiUrl';
-import { toast } from 'react-toastify';
+import {apiURL} from '../utils/apiUrl';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
-import { useForm } from "react-hook-form";
+import {Link} from 'react-router-dom';
+import {useForm} from "react-hook-form";
 
 toast.configure({ autoClose: 2000 })
 const CoursesTable = ({ courses }) => {
@@ -91,20 +91,18 @@ const CoursesTable = ({ courses }) => {
     const submitOffer = (data) => {
         setOfferLoading(true)
         const offer = {
-            "offer": {
-                "basicOfferInPercentage": data.basicOfferInPercentage,
-                "specialOfferInPercentage": data.specialOfferInPercentage,
-                "specialOfferReason": data.specialOfferReason,
-                "specialOfferStatDate": data.specialOfferStatDate,
-                "specialOfferEndDate": data.specialOfferEndDate
-            }
+            "offerInPerchance": data.specialOfferInPercentage,
+            "offerReason": data.specialOfferReason,
+            "offerStatDate": data.specialOfferStatDate,
+            "offerEndDate": data.specialOfferEndDate
+
         }
 
         axios.put(`${apiURL}admin/courses/${courseId}/offer`, offer, header)
             .then(res => {
                 if (res.status === 200) {
                     setShowOffer(false)
-                    toast.success('Successfully Section Created')
+                    toast.success('Successfully Offer Added')
                 }
             })
             .catch(err => {
@@ -222,22 +220,6 @@ const CoursesTable = ({ courses }) => {
                 <Modal.Body className="pb-4 px-4">
                     <form onSubmit={handleSubmit(submitOffer)}>
 
-                        {/* basicOfferInPercentage */}
-                        <div className="form-group mb-3">
-                            {errors.basicOfferInPercentage && errors.basicOfferInPercentage.message ? (
-                                <small className="text-danger">{errors.basicOfferInPercentage && errors.basicOfferInPercentage.message}</small>
-                            ) : <small>Basic offer in percentage</small>
-                            }
-
-                            <input
-                                type="text"
-                                name="basicOfferInPercentage"
-                                className="form-control shadow-none"
-                                ref={register({
-                                    required: "This field is Require*",
-                                })}
-                            />
-                        </div>
 
                         {/* specialOfferInPercentage */}
                         <div className="form-group mb-3">

@@ -1,20 +1,19 @@
 import React from 'react';
 import '../styles/side-menu.scss';
-import { NavLink, useHistory } from 'react-router-dom';
-import { Icon } from 'react-icons-kit';
+import {NavLink, useHistory} from 'react-router-dom';
+import {Icon} from 'react-icons-kit';
 import {
-    ic_dashboard,
-    ic_apps,
-    ic_list,
-    ic_library_add,
-    ic_group,
-    ic_settings,
     ic_account_circle,
+    ic_apps,
+    ic_dashboard,
+    ic_group,
+    ic_library_add,
+    ic_list,
     ic_notifications,
     ic_power_settings_new,
-    ic_code
+    ic_settings
 } from 'react-icons-kit/md';
-import { bullhorn } from 'react-icons-kit/iconic/bullhorn';
+import {bullhorn} from 'react-icons-kit/iconic/bullhorn';
 import Logo from '../assets/static/logo.png';
 
 const SideMenu = (props) => {
@@ -70,10 +69,10 @@ const SideMenu = (props) => {
                     <span className="ml-2">Admin List</span>
                 </NavLink>
 
-                <NavLink exact activeClassName="isActive" to="/admin/engineers">
-                    <Icon icon={ic_code} size={18} />
-                    <span className="ml-2">Engineers</span>
-                </NavLink>
+                {/*<NavLink exact activeClassName="isActive" to="/admin/engineers">*/}
+                {/*    <Icon icon={ic_code} size={18} />*/}
+                {/*    <span className="ml-2">Engineers</span>*/}
+                {/*</NavLink>*/}
 
                 <NavLink exact activeClassName="isActive" to="/admin/profile/me">
                     <Icon icon={ic_account_circle} size={18} />

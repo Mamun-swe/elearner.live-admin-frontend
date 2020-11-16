@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import '../../styles/auth.scss';
-import { Link, useHistory } from 'react-router-dom';
-import { useForm } from "react-hook-form";
+import {Link, useHistory} from 'react-router-dom';
+import {useForm} from "react-hook-form";
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
-import { apiURL } from '../../utils/apiUrl';
+import {apiURL} from '../../utils/apiUrl';
 
 import Logo from '../../assets/static/logo.png';
 
@@ -21,10 +21,13 @@ const Login = () => {
             const response = await axios.post(`${apiURL}login`, data)
             if (response.status === 200 && response.data.token) {
                 const user = jwt_decode(response.data.token)
-                if (user.scopes[0] === 'ADMIN' || 'ROLE_ADMIN') {
+                if (user.scopes[0] === 'ADMIN' || user.scopes[0] === 'ROLE_ADMIN') {
                     localStorage.setItem("token", response.data.token)
                     setLoading(false)
                     history.push('/admin')
+                } else {
+                    setLoginErr('Invalid e-mail or password')
+                    setLoading(false)
                 }
             }
         } catch (error) {

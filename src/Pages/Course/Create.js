@@ -130,7 +130,7 @@ const Create = () => {
         }
 
         try {
-            let courseRequestInString = "{\"courseSectionId\":\"" + category + "\",\"courseName\":\"" + data.courseName + "\",\"courseGoal\":\"" + content + "\",\"courseMaxNumberOfLearner\":\"" + data.courseMaxNumberOfLearner + "\",\"courseOrientationDate\":\"" + data.courseOrientationDate + "\",\"courseStartingDate\":\"" + data.courseStartingDate + "\",\"courseFinishingDate\":\"" + data.courseFinishingDate + "\",\"courseTotalDurationInDays\":\"" + data.courseTotalDurationInDays + "\",\"courseNumberOfClasses\":\"" + data.courseNumberOfClasses + "\",\"courseClassDuration\":\"" + data.courseClassDuration + "\",\"youtubeEmbeddedLink\":\"" + data.youtubeEmbeddedLink + "\",\"courseClassTimeScheduleRequests\":[" + shedulesListArr + "],\"courseInstructorId\":\"" + instructor + "\",\"coursePriceInTk\":\"" + data.coursePriceInTk + "\",\"offer\":{\"basicOfferInPercentage\":\"0\",\"specialOfferInPercentage\":\"0\",\"specialOfferReason\":\"\",\"specialOfferStatDate\":\"\",\"specialOfferEndDate\":\"\"}}";
+            let courseRequestInString = "{\"courseSectionId\":\"" + category + "\",\"courseName\":\"" + data.courseName + "\",\"courseBasicDescription\":\"" + data.basic_about_of_course + "\",\"courseWhyDo\":\"" + data.why_do_this_course + "\",\"courseGoal\":\"" + content + "\",\"courseMaxNumberOfLearner\":\"" + data.courseMaxNumberOfLearner + "\",\"courseOrientationDate\":\"" + data.courseOrientationDate + "\",\"courseStartingDate\":\"" + data.courseStartingDate + "\",\"courseFinishingDate\":\"" + data.courseFinishingDate + "\",\"courseTotalDurationInDays\":\"" + data.courseTotalDurationInDays + "\",\"courseNumberOfClasses\":\"" + data.courseNumberOfClasses + "\",\"courseClassDuration\":\"" + data.courseClassDuration + "\",\"youtubeEmbeddedLink\":\"" + data.youtubeEmbeddedLink + "\",\"courseClassTimeScheduleRequests\":[" + shedulesListArr + "],\"courseInstructorId\":\"" + instructor + "\",\"coursePriceInTk\":\"" + data.coursePriceInTk + "\",\"offer\":{\"basicOfferInPercentage\":\"0\",\"specialOfferInPercentage\":\"0\",\"specialOfferReason\":\"\",\"specialOfferStatDate\":\"\",\"specialOfferEndDate\":\"\"}}";
 
             let formData = new FormData()
             formData.append('courseRequestInString', courseRequestInString)
@@ -181,7 +181,6 @@ const Create = () => {
                                                     <small className="text-danger">{errors.courseName && errors.courseName.message}</small>
                                                 ) : <small>Course Name</small>
                                                 }
-
                                                 <input
                                                     type="text"
                                                     name="courseName"
