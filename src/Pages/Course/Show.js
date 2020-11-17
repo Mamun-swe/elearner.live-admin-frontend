@@ -46,7 +46,6 @@ const Show = () => {
             try {
                 setLoading(true)
                 const response = await axios.get(`${apiURL}courses/${id}`)
-                console.log(response.data)
                 setCourse(response.data)
                 setSaturdays(response.data.courseClassTimeSchedule.saturdays)
                 setSundays(response.data.courseClassTimeSchedule.sundays)
@@ -102,7 +101,7 @@ const Show = () => {
                             <div className="embed-responsive embed-responsive-21by9 mb-4">
                                 <iframe
                                     className="embed-responsive-item"
-                                    src="https://www.youtube.com/embed/i_NmPv5WQ0U"
+                                    src={course.youtubeEmbeddedLink}
                                     title="..."
                                     allowFullScreen></iframe>
                             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Icon } from 'react-icons-kit';
-import { circle_ok, circle_pause } from 'react-icons-kit/ikons';
+import {Icon} from 'react-icons-kit';
+import {circle_ok, circle_pause} from 'react-icons-kit/ikons';
 
 const learnersTable = ({ learners }) => {
     return (
@@ -8,12 +8,13 @@ const learnersTable = ({ learners }) => {
             <table className="table table-sm table-bordered table-responsive-sm">
                 <thead>
                     <tr>
-                        <td><p>SL</p></td>
+                        <td><p>Learner Id</p></td>
                         <td><p>Name</p></td>
                         <td><p>E-mail</p></td>
                         <td><p>Phone</p></td>
-                        <td><p>Course</p></td>
-                        <td className="text-center"><p>Payment</p></td>
+                        <td><p>Course & Status</p></td>
+                        <td className="text-center"><p>Block</p></td>
+
                     </tr>
                 </thead>
 
@@ -22,24 +23,37 @@ const learnersTable = ({ learners }) => {
 
                     {learners.length > 0 && learners.map((learner, i) =>
                         <tr key={i}>
-                            <td><p>{i + 1}</p></td>
+                            <td><p>{learner.learnerId}</p></td>
                             <td className="text-capitalize"><p>{learner.name}</p></td>
                             <td className="text-lowercase"><p>{learner.email}</p></td>
-                            <td className="text-lowercase"><p>{learner.phone}</p></td>
+                            <td className="text-lowercase"><p>{learner.phoneNo}</p></td>
                             <td>
-                                <ol className="pl-4 mb-0">
-                                    <li className="mb-2"><p>web development with react</p></li>
-                                    <li className="mb-2"><p>web development with react</p></li>
-                                </ol>
+                                {learner.registeredCourseResponses.length > 0 && learner.registeredCourseResponses.map((mycourses, i) =>
+                                    <tr>
+                                        <td className="border-0 border-t p-1">{mycourses.courseName}</td>
+                                        <p> {mycourses.paymentVerified} </p>
+                                        <td className="p-1">{mycourses.paymentVerified ? <div>
+                                                <p>Status: <strong>Running</strong></p>
+                                                <p>Paid Amount: {mycourses.paid}</p>
+                                                <p>Paid Time & Date: {mycourses.paymentDateAndTime}</p>
+                                                <p>Payment Method: {mycourses.paymentMethod}</p>
+                                                <p>TrxId: {mycourses.paymentTrxId}</p>
+                                                <p>Payment Approve Date & Time: {mycourses.paymentVerifyDateAndTime}</p>
+                                            </div> :
+                                            <p>Pre-Registration Only</p>
+                                        }</td>
+
+                                    </tr>
+                                )}
+
                             </td>
                             <td className="text-center">
                                 {learner.id % 2 === 0 ?
                                     <Icon icon={circle_ok} size={22} className="text-success" /> :
                                     <Icon icon={circle_pause} size={22} className="text-danger" />
                                 }
-
-
                             </td>
+
                         </tr>
                     )}
 

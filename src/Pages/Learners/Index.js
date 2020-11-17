@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../styles/all-index.scss';
-import { apiURL } from '../../utils/apiUrl';
+import {apiURL} from '../../utils/apiUrl';
 import axios from 'axios';
 
 import LearnersTable from '../../Components/learnersTable';
@@ -9,7 +9,13 @@ const Index = () => {
     const [learners, setLearners] = useState([])
     const [scrolled, setScrolled] = useState(true)
     const [loading, setLoading] = useState(false)
-
+    // Header
+    const header = {
+        headers:
+            {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+    }
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -23,8 +29,9 @@ const Index = () => {
 
         const fetchLearners = () => {
             setLoading(true)
-            axios.get(`${apiURL}users`)
+            axios.get(`${apiURL}learners`, header)
                 .then(res => {
+                    console.log(res.data)
                     setLearners(res.data)
                     setLoading(false)
                 })
