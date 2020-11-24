@@ -1,19 +1,20 @@
 import React from 'react';
-import { Icon } from 'react-icons-kit';
-import { pen_3, block } from 'react-icons-kit/ikons';
-import { Link } from 'react-router-dom';
+import {Icon} from 'react-icons-kit';
+import {block, pen_3} from 'react-icons-kit/ikons';
+import {Link} from 'react-router-dom';
 
 const AdminTable = ({ admins }) => {
+    console.log(admins)
     return (
         <div className="data">
             <table className="table table-sm table-bordered table-responsive-sm">
                 <thead>
                     <tr>
                         <td className="text-center"><p>SL</p></td>
+                        <td><p>Id </p></td>
                         <td><p>Name</p></td>
                         <td><p>E-mail</p></td>
                         <td><p>Phone</p></td>
-                        <td className="text-center"><p>Role</p></td>
                         <td className="text-center"><p>Action</p></td>
                     </tr>
                 </thead>
@@ -24,10 +25,11 @@ const AdminTable = ({ admins }) => {
                     {admins.length > 0 && admins.map((admin, i) =>
                         <tr key={i}>
                             <td className="text-center"><p>{i + 1}</p></td>
-                            <td className="text-capitalize"><p>{admin.name}</p></td>
+                            <td className="text-capitalize"><p>{admin.adminId}</p></td>
+                            <td className="text-lowercase"><p>{admin.name}</p></td>
                             <td className="text-lowercase"><p>{admin.email}</p></td>
-                            <td className="text-lowercase"><p>{admin.phone}</p></td>
-                            <td className="text-capitalize text-center"><p>Role</p></td>
+                            <td className="text-lowercase"><p>{admin.phoneNo}</p></td>
+
                             <td className="text-center">
                                 <Link
                                     to={`/admin/${admin.id}/edit-admin`}

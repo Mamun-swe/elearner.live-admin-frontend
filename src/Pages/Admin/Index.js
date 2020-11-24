@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../styles/all-index.scss';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Icon } from 'react-icons-kit';
-import { ic_add } from 'react-icons-kit/md';
-import { apiURL } from '../../utils/apiUrl';
+import {Link} from 'react-router-dom';
+import {Icon} from 'react-icons-kit';
+import {ic_add} from 'react-icons-kit/md';
+import {apiURL} from '../../utils/apiUrl';
 
 import AdminTable from '../../Components/AdminTable';
 
@@ -12,7 +12,13 @@ const Index = () => {
     const [admins, setAdmins] = useState([])
     const [scrolled, setScrolled] = useState(true)
     const [loading, setLoading] = useState(false)
-
+    // Header
+    const header = {
+        headers:
+            {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+    }
     useEffect(() => {
         window.addEventListener('scroll', () => {
             let isTop = window.scrollY < 50;
@@ -31,7 +37,8 @@ const Index = () => {
                 //         setAdmins(res.data)
                 //         setLoading(false)
                 //     })
-                const response = await axios.get(`${apiURL}users`)
+                const response = await axios.get(`${apiURL}admin`, header)
+                setAdmins(response.data)
             } catch (error) {
                 if (error) console.log(error.message)
             }

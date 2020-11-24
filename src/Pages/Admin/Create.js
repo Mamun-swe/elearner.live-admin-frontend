@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../styles/all-create.scss";
-import { useForm } from "react-hook-form";
-import { Icon } from 'react-icons-kit';
-import { Link } from 'react-router-dom';
-import { ic_keyboard_arrow_left } from 'react-icons-kit/md';
+import {useForm} from "react-hook-form";
+import {Icon} from 'react-icons-kit';
+import {Link} from 'react-router-dom';
+import {ic_keyboard_arrow_left} from 'react-icons-kit/md';
 import axios from 'axios';
-import { apiURL } from '../../utils/apiUrl';
-import { toast } from 'react-toastify';
+import {apiURL} from '../../utils/apiUrl';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure({ autoClose: 2000 })
@@ -25,11 +25,18 @@ const Create = () => {
             }
         })
     })
+    // Header
+    const header = {
+        headers:
+            {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+    }
 
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const createAdmin = await axios.post(`${apiURL}sign-up/admin`, data)
+            const createAdmin = await axios.post(`${apiURL}sign-up/admin`, data, header)
             if (createAdmin.status === 201) {
                 setLoading(false)
                 toast.success('Successfully Admin Created')
