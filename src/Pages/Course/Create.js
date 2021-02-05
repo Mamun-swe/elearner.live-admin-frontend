@@ -46,7 +46,7 @@ const Create = () => {
 
         // Fetch Instructors
         const fetchInstructors = async () => {
-            const response = await axios.get(`${apiURL}admin/instructors`)
+            const response = await axios.get(`${apiURL}instructors`)
             setInstructors(response.data.map(opt => ({ label: opt.name + ` (${opt.phoneNo})`, value: opt.instructorId })))
         }
         fetchInstructors()

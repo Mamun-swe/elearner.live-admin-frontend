@@ -42,7 +42,7 @@ const Index = () => {
         const fetchInstructors = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}admin/instructors`, header)
+                const response = await axios.get(`${apiURL}instructors`, header)
                 setInstructors(response.data)
                 setLoading(false)
                 console.log(response.data)

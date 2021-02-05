@@ -91,10 +91,16 @@ const CoursesTable = ({ courses }) => {
     const submitOffer = (data) => {
         setOfferLoading(true)
         const offer = {
-            "offerInPerchance": data.specialOfferInPercentage,
-            "offerReason": data.specialOfferReason,
-            "offerStatDate": data.specialOfferStatDate,
-            "offerEndDate": data.specialOfferEndDate
+            "basicOfferInPercentage": data.specialOfferInPercentage,
+            "basicOfferDetails": data.specialOfferReason,
+            "specialOfferInLowestPercentage": 0,
+            "specialOfferInHighestPercentage": 0,
+            "specialOfferIncrementPercentage": 0,
+            "specialOfferIncrementAfterTimeDuration": 0,
+            "specialOfferDetails": data.specialOfferReason,
+            "specialOfferStatDate": data.specialOfferStatDate,
+            "specialOfferEndDate": data.specialOfferEndDate,
+            "basicOfferEnable": false
 
         }
 

@@ -35,8 +35,8 @@ const InstructorTable = ({ instructors }) => {
                     <div className="p-2 content">
                         <h5 className="text-capitalize">{instructor.name}</h5>
                         <ul>
-                            <li><p><span>Enrollment courses:</span> 100</p></li>
-                            <li className="pl-lg-3"><p><span>{instructor.qualificationInfo.designation}</span></p></li>
+                            <li><p><span>Enrollment courses:</span> 00</p></li>
+                            <li className="pl-lg-3"><p><span>{instructor.qualificationInfo.designation} at {instructor.qualificationInfo.companyName}</span></p></li>
                         </ul>
                         <small className="d-lg-none">Instructor Added by Admin</small>
                     </div>
