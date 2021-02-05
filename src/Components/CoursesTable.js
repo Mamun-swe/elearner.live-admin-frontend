@@ -8,7 +8,7 @@ import axios from 'axios';
 import {apiURL} from '../utils/apiUrl';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 
 toast.configure({ autoClose: 2000 })
@@ -20,6 +20,7 @@ const CoursesTable = ({ courses }) => {
     const [loading, setLoading] = useState(false)
     const [courseId, setCourseId] = useState()
     const [offerLoading, setOfferLoading] = useState(false)
+    const history = useHistory()
 
     const openModal = id => {
         setDeleteId(id)
@@ -85,6 +86,10 @@ const CoursesTable = ({ courses }) => {
         } catch (error) {
             if (error) console.log(error)
         }
+    }
+    //Edit Courses
+    const editCourseById = async (courseId) => {
+        history.push("/admin/course/" + courseId + "/edit")
     }
 
     // Submit Offer
@@ -154,9 +159,12 @@ const CoursesTable = ({ courses }) => {
                                 </Link>
                             </li>
                             <li>
-                                <button type="button" className="btn btn-light rounded-circle shadow-none">
-                                    <Icon icon={pen_1} size={20} />
+                                <button type="button" className="btn btn-light rounded-circle shadow-none"
+                                        onClick={() => editCourseById(course.courseId)}>
+                                    <Icon icon={pen_1} size={20}/>
                                 </button>
+                            </li>
+                            <li>
                                 {course.isPublish ?
                                     <button type="button"
                                         className="btn rounded-circle shadow-none"
